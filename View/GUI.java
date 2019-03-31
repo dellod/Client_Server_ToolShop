@@ -1,50 +1,50 @@
 
+package View;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 
-//package View;
 /**
- * MAR 30 ####### -have to add listeners for some of the buttons to add functionality
- * 			 	  -possibly add selection pane at the south panel to see choice
+ * MAR 30 ####### -possibly add selection pane at the south panel to see choice
  * @author Daryl
  *
  */
 public class GUI extends JFrame
 {
-	private ArrayList<JButton> buttons;
-	/*
-	 * INDEX	Button
-	 * 0		List
-	 * 1		Search
-	 * 2		Check
-	 * 3		Decrease
-	 * 4		Print
-	 * 5		Quit
+	/**
+	 * Represents the list button, and will display all the tools or suppliers.
 	 */
+	JButton lists;
+	
+	Object[] optionsList = {"Tools", "Suppliers"};
+	
+	JButton search;
+	
+	JButton check;
+	
+	JButton decrease;
+	
+	JButton order;
+	
+	JButton quit;
 	
 	private JList<String> listArea;
 	private DefaultListModel<String> list;
 	private JScrollPane listScroll;
 	
-	private MyListener listener;
+	private MainListener listener;
 	
 	private Border panelEdge = BorderFactory.createEtchedBorder(); //eteched border
 	
 	public GUI()
 	{
 		super("Tool Shop Application");
-		buttons = new ArrayList<JButton>();
-		//listener = MyListener(this);
+		listener = new MainListener(this);
 		setLayout(new BorderLayout());
 		setSize(500, 500);
 		setDefaultCloseOperation(this.EXIT_ON_CLOSE); // allows termination when exit is pressed.
-	}
-	
-	public ArrayList<JButton> getButtons()
-	{
-		return buttons;
 	}
 	
 	private void buildNorth() // Title area.
@@ -80,22 +80,26 @@ public class GUI extends JFrame
 	private void buildSouth() // Button area.
 	{
 		JPanel southPanel = new JPanel();
-		buttons.add(new JButton("List"));
-		buttons.add(new JButton("Search"));
-		buttons.add(new JButton("Check"));
-		buttons.add(new JButton("Decrease"));
-		buttons.add(new JButton("Print"));
-		buttons.add(new JButton("Quit"));
-		/*
-		for(JButton b: buttons)
-		{
-			b.addActionListener(listener); // NEED TO ADD THE ACTIONS
-		}
-		*/
-		for(JButton b: buttons)
-		{
-			southPanel.add(b);
-		}
+		lists = (new JButton("List"));
+		search = (new JButton("Search"));
+		check = (new JButton("Check"));
+		decrease = (new JButton("Decrease"));
+		order = (new JButton("Order"));
+		quit = (new JButton("Quit"));
+		
+		lists.addActionListener(listener);
+		search.addActionListener(listener);
+		check.addActionListener(listener);
+		decrease.addActionListener(listener);
+		order.addActionListener(listener);
+		quit.addActionListener(listener);
+		
+		southPanel.add(lists);
+		southPanel.add(search);
+		southPanel.add(check);
+		southPanel.add(decrease);
+		southPanel.add(order);
+		southPanel.add(quit);
 			
 		add("South", southPanel);
 	}
@@ -119,6 +123,13 @@ public class GUI extends JFrame
 		buildWest();
 		
 		setVisible(true);
+	}
+	
+	public void listWindow()
+	{
+		
+		
+		int n = JOptionPane.showOptionDialog(this, "Which would you like to list?", "List", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsList, optionsList[1]);
 	}
 	
 	public static void main(String[] args)
