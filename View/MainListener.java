@@ -34,6 +34,7 @@ class MainListener implements ActionListener
 		}
 		else if(e.getSource() == frame.search)
 		{
+			frame.searchWindow();
 			System.out.println("search has been pressed");
 		}
 		else if(e.getSource() == frame.check)

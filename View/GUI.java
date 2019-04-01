@@ -87,6 +87,7 @@ public class GUI extends JFrame
 		order = (new JButton("Order"));
 		quit = (new JButton("Quit"));
 		
+		// Add action to each main menu button.
 		lists.addActionListener(listener);
 		search.addActionListener(listener);
 		check.addActionListener(listener);
@@ -94,6 +95,7 @@ public class GUI extends JFrame
 		order.addActionListener(listener);
 		quit.addActionListener(listener);
 		
+		// Add buttons to the south panel.
 		southPanel.add(lists);
 		southPanel.add(search);
 		southPanel.add(check);
@@ -127,9 +129,42 @@ public class GUI extends JFrame
 	
 	public void listWindow()
 	{
-		
-		
 		int n = JOptionPane.showOptionDialog(this, "Which would you like to list?", "List", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsList, optionsList[1]);
+		//have to make this listen outside
+	}
+	
+	public void searchWindow()
+	{
+		TextField nameIn; // have to add this to the whole class so you can use .getText when button is pressed.
+		TextField idIn;
+		
+		JDialog searchW = new JDialog();
+		searchW.setTitle("Search");
+		JTabbedPane tabbedPane = new JTabbedPane();
+		
+		JPanel page1 = new JPanel();
+		page1.add(new Label("Enter name "));
+		nameIn = new TextField(10);
+		page1.add(nameIn);
+		JButton searchN = new JButton("Search"); // will have to make this accessible to the whole class.
+		page1.add(searchN); 
+	   
+		JPanel page2 = new JPanel();
+		page2.add(new Label("Enter ID "));
+		idIn = new TextField(10);
+		page2.add(idIn);
+		JButton searchI = new JButton("Search"); // will have to make this accessible to the whole class.
+		page2.add(searchI);
+
+	    
+		tabbedPane.addTab("Name", null, page1, "Search by name");
+		tabbedPane.addTab("ID", null, page2, "Search by id");
+		
+		searchW.add(tabbedPane);
+		
+		searchW.setLocationRelativeTo(this); // Centers in respect to parent window
+		searchW.pack();
+		searchW.setVisible(true);
 	}
 	
 	public static void main(String[] args)
