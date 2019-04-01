@@ -39,10 +39,12 @@ class MainListener implements ActionListener
 		}
 		else if(e.getSource() == frame.check)
 		{
+			frame.checkWindow();
 			System.out.println("check has been pressed");
 		}
 		else if(e.getSource() == frame.decrease)
 		{
+			frame.decreaseWindow();
 			System.out.println("decrease has been pressed");
 		}
 		else if(e.getSource() == frame.order)

@@ -167,6 +167,35 @@ public class GUI extends JFrame
 		searchW.setVisible(true);
 	}
 	
+	public String checkWindow()
+	{
+		String id = JOptionPane.showInputDialog("Enter ID of tool to check its stock ");
+		 
+		// SOME CALL TO FIND said stock
+			// if equal null , say not found
+			// else return the stock number
+		
+		String stock = "";
+		return stock;
+	}
+	
+	public void decreaseWindow()
+	{
+		JTextField id = new JTextField();
+		JTextField decreaseAmount = new JTextField();
+		
+		JComponent[] inputs = new JComponent[] {new JLabel("Tool ID: "), id, new JLabel("Decrease Amount: "), decreaseAmount};
+		Object[] options = {"Decrease" , "Cancel"};
+		int result = JOptionPane.showOptionDialog(null,  inputs, "Decrease tool quantity",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+		
+		if(result == JOptionPane.YES_NO_OPTION)
+		{
+			System.out.println("Tool" + id + " is going to be decreased");
+			// DECREASE THE AMOUNT REQUESTED BY SEARCHING THE TOOL ID AND TAKING AWAY FROM ITS STOCK
+			// THEN DISPLAY THE NEW QUANTITY HERE
+		}
+	}
+	
 	public static void main(String[] args)
 	{
 		GUI test = new GUI();
