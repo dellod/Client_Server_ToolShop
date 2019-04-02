@@ -1,3 +1,4 @@
+package Model;
 /**
  * This class provides the details of a supplier.
  * 
@@ -110,7 +111,7 @@ public class Supplier
 	 * Converts variables and content of object Supplier to string format.
 	 * @return string that holds the conent of object Supplier.
 	 */
-	public String toStringSupplier()
+	public String toString()
 	{
 		return supplierId + ";" + companyName + ";" + address + ";" + contactName;
 	}

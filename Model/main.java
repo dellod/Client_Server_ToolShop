@@ -2,6 +2,9 @@ import java.util.*;
 import java.io.*;
 
 /**
+ * ####WONT NEED THIS FILE FOR CLIENT-SERVER####
+ * 
+ * 
  * This is the front-end of the program (main application) that the user 
  * interacts with for certain manipulation of the back-end.
  * 

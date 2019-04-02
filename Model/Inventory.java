@@ -1,8 +1,10 @@
+package Model;
 import java.util.ArrayList;
 
 /**
  * This class provides a list of items that are available in the inventory.
  * 
+ * ############ NEW: Designing to work for client-server.
  * @author Daryl Dang
  * @since Feb 5, 2019
  */
@@ -37,7 +39,8 @@ public class Inventory
 	 */
 	public void listItem(int index)
 	{
-		System.out.println(inventory.get(index).toStringItem());
+		// HAVE TO CHANGE THIS SO IT DOES NOT PRINT TO CONSOLE BUT INSTEAD THE GUI
+		//System.out.println(inventory.get(index).toStringItem()); 
 	}
 
 	/**

@@ -1,3 +1,5 @@
+package Model;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -70,7 +72,9 @@ public class Order
 	 * amount ordered, and the supplier ID.
 	 */
 	public void printOrder()
-	{
+	{ 
+		// NEEDS TO SEND STRING TO SERVER CLIENT COMMUNICAITON TO PRINT TO GUI.
+		/*
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		System.out.println("*******************************************");
 		System.out.println("ORDER ID: " + orderId);
@@ -79,5 +83,6 @@ public class Order
 		System.out.println("Amount Ordered: " + orderL.getQuantity());
 		System.out.println("SupplierID: " + orderL.getItem().getSupplierId());
 		System.out.println("*******************************************");
+		*/
 	}
 }

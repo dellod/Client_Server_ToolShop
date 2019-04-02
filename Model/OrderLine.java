@@ -1,7 +1,8 @@
-
+package Model;
 /**
  * This class provides the item with its details to be ordered for the shop.
  * 
+ * ############ NEW: Designing to work for client-server.
  * @author Daryl Dang
  * @since Feb 5, 2019
  *

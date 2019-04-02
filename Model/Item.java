@@ -1,6 +1,9 @@
+package Model;
+
 /**
  * This class provides the details and specifications of the items (tools).
  * 
+ * ############ NEW: Designing to work for client-server.
  * @author Daryl Dang
  * @since Feb 5, 2019
  */
@@ -142,7 +145,7 @@ public class Item
 	 * Converts the content and variables of object Item to string.
 	 * @return a string that contains information on the object Item.
 	 */
-	public String toStringItem()
+	public String toString()
 	{
 		return id + ";" + name  + ";" + stock + ";" + price + ";" +  supplierId;
 	}
