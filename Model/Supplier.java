@@ -1,4 +1,7 @@
 package Model;
+
+import java.io.Serializable;
+
 /**
  * This class provides the details of a supplier.
  * 
@@ -6,7 +9,7 @@ package Model;
  * @since Feb 5, 2019
  *
  */
-public class Supplier 
+public class Supplier implements Serializable
 {
 	/**
 	 * The ID number of the supplier.
@@ -41,7 +44,7 @@ public class Supplier
 		
 		while(index < s.length()) // THIS WORKs BUT ONLY FOR .txt FILE
 		{
-			if(s.charAt(index) != ';' || tokenIndex != 4)
+			if(s.charAt(index) != ';' || tokenIndex != 5)
 			{
 				temp += s.charAt(index);
 			}
@@ -61,6 +64,11 @@ public class Supplier
 						break;
 					case 3: // address
 						address = temp;
+						temp = "";
+						tokenIndex++;
+						break;
+					case 4:
+						contactName = temp;
 						temp = "";
 						tokenIndex++;
 						break;

@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * This class provides the details and specifications of the items (tools).
  * 
@@ -7,7 +9,7 @@ package Model;
  * @author Daryl Dang
  * @since Feb 5, 2019
  */
-public class Item 
+public class Item implements Serializable
 {
 	/**
 	 * 4-digit ID number of the item.
