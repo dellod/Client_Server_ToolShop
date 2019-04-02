@@ -5,28 +5,29 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import ClientController.Client;
+
 public class SearchListener implements ActionListener
 {
-	JButton id;
+	GUI frame;
 	
-	JButton name;
-	
-	String i;
-	
-	String n;
-	
-	Client controller;
+	public SearchListener(GUI f)
+	{
+		frame = f;
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(e.getSource() == id)
+		if(e.getSource() == frame.searchI)
 		{
-			controller.searchID(i);
+			frame.client.searchID(frame.idIn.getText());
+			frame.searchW.dispose();
 		}
-		else if(e.getSource() == name)
+		else if(e.getSource() == frame.searchN)
 		{
-			contoller.searchName(n);
+			frame.client.searchName(frame.nameIn.getText());
+			frame.searchW.dispose();
 		}
 	}
 

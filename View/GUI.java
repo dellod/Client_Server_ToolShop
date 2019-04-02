@@ -3,6 +3,9 @@ package View;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+
+import ClientController.Client;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -18,14 +21,25 @@ public class GUI extends JFrame
 	 */
 	JButton lists;
 	
-	Object[] optionsList = {"Tools", "Suppliers"};
+		Object[] optionsList = {"Tools", "Suppliers"};
+	
 	
 	JButton search;
+	
+		JDialog searchW;
+		TextField nameIn; // have to add this to the whole class so you can use .getText when button is pressed.
+		TextField idIn;
+		JButton searchN;
+		JButton searchI;
+		
 	
 	JButton check;
 	
 	JButton decrease;
 	
+		JTextField id;
+		JTextField decreaseAmount;
+		
 	JButton order;
 	
 	JButton quit;
@@ -36,11 +50,14 @@ public class GUI extends JFrame
 	
 	private MainListener listener;
 	
+	Client client;
+	
 	private Border panelEdge = BorderFactory.createEtchedBorder(); //eteched border
 	
-	public GUI()
+	public GUI(Client c)
 	{
 		super("Tool Shop Application");
+		client = c;
 		listener = new MainListener(this);
 		setLayout(new BorderLayout());
 		setSize(500, 500);
@@ -143,17 +160,13 @@ public class GUI extends JFrame
 		{
 			return "";
 		}
-		//have to make this listen outside
 	}
 	
 	public void searchWindow() // DO THIS LAST...
 	{
-		SearchListener searchListen = null;
+		SearchListener searchListen = new SearchListener(this);
 		
-		TextField nameIn; // have to add this to the whole class so you can use .getText when button is pressed.
-		TextField idIn;
-		
-		JDialog searchW = new JDialog();
+		searchW = new JDialog();
 		searchW.setTitle("Search");
 		JTabbedPane tabbedPane = new JTabbedPane();
 		
@@ -161,22 +174,18 @@ public class GUI extends JFrame
 		page1.add(new Label("Enter name "));
 		nameIn = new TextField(10);
 		page1.add(nameIn);
-		JButton searchN = new JButton("Search ID"); // will have to make this accessible to the whole class.
+		searchN = new JButton("Search Name"); // will have to make this accessible to the whole class.
 		page1.add(searchN); 
 	   
 		JPanel page2 = new JPanel();
 		page2.add(new Label("Enter ID "));
 		idIn = new TextField(10);
 		page2.add(idIn);
-		JButton searchI = new JButton("Search Name"); // will have to make this accessible to the whole class.
+		searchI = new JButton("Search ID"); // will have to make this accessible to the whole class.
 		page2.add(searchI);
 
 		
 		// not sure about this part
-		searchListen.name = searchN;
-		searchListen.id = searchI;
-		searchListen.n = nameIn.getText();
-		searchListen.i = idIn.getText();
 		searchN.addActionListener(searchListen);
 		searchI.addActionListener(searchListen);
 		
@@ -195,18 +204,13 @@ public class GUI extends JFrame
 	{
 		String id = JOptionPane.showInputDialog("Enter ID of tool to check its stock ");
 		 
-		// SOME CALL TO FIND said stock
-			// if equal null , say not found
-			// else return the stock number
-		
-		String stock = "";
-		return stock;
+		return id;
 	}
 	
-	public void decreaseWindow()
+	public String decreaseWindow()
 	{
-		JTextField id = new JTextField();
-		JTextField decreaseAmount = new JTextField();
+		id = new JTextField();
+		decreaseAmount = new JTextField();
 		
 		JComponent[] inputs = new JComponent[] {new JLabel("Tool ID: "), id, new JLabel("Decrease Amount: "), decreaseAmount};
 		Object[] options = {"Decrease" , "Cancel"};
@@ -214,15 +218,14 @@ public class GUI extends JFrame
 		
 		if(result == JOptionPane.YES_NO_OPTION)
 		{
-			System.out.println("Tool" + id + " is going to be decreased");
-			// DECREASE THE AMOUNT REQUESTED BY SEARCHING THE TOOL ID AND TAKING AWAY FROM ITS STOCK
-			// THEN DISPLAY THE NEW QUANTITY HERE
+			return "decrease";
 		}
+		return "";
 	}
 	
 	public static void main(String[] args)
 	{
-		GUI test = new GUI();
+		GUI test = new GUI(new Client("localhost", 8099));
 		test.buildAll();
 	}
 }

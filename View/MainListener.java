@@ -2,6 +2,8 @@ package View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import ClientController.Client;
 /**
  * MAR 30 #### -added actionlistener for main buttons 
  * 			   -stil have to add listeners for sub buttons.
@@ -20,7 +22,7 @@ class MainListener implements ActionListener
 	 * @param f is the main GUI of application to be assigned to the frame variable.
 	 */
 	
-	private Client controller;
+	//private Client controller;
 	
 	public MainListener(GUI f)
 	{
@@ -35,11 +37,11 @@ class MainListener implements ActionListener
 			String list = frame.listWindow();
 			if(list == "tools")
 			{
-				controller.listTools();
+				frame.client.listTools();
 			}
 			else if(list == "suppliers")
 			{
-				controller.listSuppliers();
+				frame.client.listSuppliers();
 			}
 			else
 			{
@@ -54,16 +56,26 @@ class MainListener implements ActionListener
 		}
 		else if(e.getSource() == frame.check)
 		{
-			frame.checkWindow();
+			String id = frame.checkWindow();
+			frame.client.check(id);
 			System.out.println("check has been pressed");
 		}
 		else if(e.getSource() == frame.decrease)
 		{
-			frame.decreaseWindow();
+			String dec = frame.decreaseWindow();
+			if(dec == "decrease")
+			{
+				frame.client.decrease(frame.id.getText(), frame.decreaseAmount.getText());
+			}
+			else
+			{
+				System.out.println("Something went wrong in decrease window."); // take out later.
+			}
 			System.out.println("decrease has been pressed");
 		}
 		else if(e.getSource() == frame.order)
 		{
+			frame.client.order();
 			System.out.println("order has been pressed");
 		}
 		else if(e.getSource() == frame.quit) // Quit is pressed

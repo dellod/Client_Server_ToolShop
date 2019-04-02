@@ -1,3 +1,5 @@
+package ClientController;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -28,24 +30,25 @@ public class Client {
 		System.out.println("list tools");
 	}
 	public void searchName(String name) {
-		
+		System.out.println("Searching name: " + name);
 	}
-	public void searchID(int ID) {
-		
+	public void searchID(String ID) {
+		System.out.println("Searching id: " + ID);
 	}
-	public void check(int ID) {
-		
+	public void check(String ID) {
+		System.out.println("Searching id for checking stock: " + ID);
 	}
-	public void decrease(int ID, int amount) {
-		
+	public void decrease(String ID, String amount) 
+	{
+		System.out.println("Going to decrease item id: " + ID + " by this amount: " + amount);
 	}
 	public void order() {
-		
+		System.out.println("printing orders...");		
 	}
 	public static void main(String[] args) {
 		Client c=new Client("localhost", 8099);
-		GUI test = new GUI();
-		test.buildAll();
+		//GUI test = new GUI();
+		//test.buildAll();
 		
 		
 	}
