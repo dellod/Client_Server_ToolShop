@@ -19,6 +19,9 @@ class MainListener implements ActionListener
 	 * Constructs a MyListener object with a given GUI.
 	 * @param f is the main GUI of application to be assigned to the frame variable.
 	 */
+	
+	private Client controller;
+	
 	public MainListener(GUI f)
 	{
 		frame = f;
@@ -29,7 +32,19 @@ class MainListener implements ActionListener
 	{
 		if(e.getSource() == frame.lists)
 		{
-			frame.listWindow();
+			String list = frame.listWindow();
+			if(list == "tools")
+			{
+				controller.listTools();
+			}
+			else if(list == "suppliers")
+			{
+				controller.listSuppliers();
+			}
+			else
+			{
+				System.out.println("Something went wrong in list window."); // take out later.
+			}
 			System.out.println("list has been pressed");
 		}
 		else if(e.getSource() == frame.search)

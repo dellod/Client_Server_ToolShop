@@ -127,14 +127,29 @@ public class GUI extends JFrame
 		setVisible(true);
 	}
 	
-	public void listWindow()
+	public String listWindow()
 	{
 		int n = JOptionPane.showOptionDialog(this, "Which would you like to list?", "List", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsList, optionsList[1]);
+		
+		if(n == JOptionPane.YES_OPTION) // Tools
+		{
+			return "tools";
+		}
+		else if(n == JOptionPane.NO_OPTION)
+		{
+			return "suppliers";
+		}
+		else
+		{
+			return "";
+		}
 		//have to make this listen outside
 	}
 	
-	public void searchWindow()
+	public void searchWindow() // DO THIS LAST...
 	{
+		SearchListener searchListen = null;
+		
 		TextField nameIn; // have to add this to the whole class so you can use .getText when button is pressed.
 		TextField idIn;
 		
@@ -146,17 +161,26 @@ public class GUI extends JFrame
 		page1.add(new Label("Enter name "));
 		nameIn = new TextField(10);
 		page1.add(nameIn);
-		JButton searchN = new JButton("Search"); // will have to make this accessible to the whole class.
+		JButton searchN = new JButton("Search ID"); // will have to make this accessible to the whole class.
 		page1.add(searchN); 
 	   
 		JPanel page2 = new JPanel();
 		page2.add(new Label("Enter ID "));
 		idIn = new TextField(10);
 		page2.add(idIn);
-		JButton searchI = new JButton("Search"); // will have to make this accessible to the whole class.
+		JButton searchI = new JButton("Search Name"); // will have to make this accessible to the whole class.
 		page2.add(searchI);
 
-	    
+		
+		// not sure about this part
+		searchListen.name = searchN;
+		searchListen.id = searchI;
+		searchListen.n = nameIn.getText();
+		searchListen.i = idIn.getText();
+		searchN.addActionListener(searchListen);
+		searchI.addActionListener(searchListen);
+		
+		
 		tabbedPane.addTab("Name", null, page1, "Search by name");
 		tabbedPane.addTab("ID", null, page2, "Search by id");
 		
