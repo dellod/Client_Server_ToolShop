@@ -71,8 +71,18 @@ public class Order
 	 * Prints the order specifics out with the order ID, date, item description,
 	 * amount ordered, and the supplier ID.
 	 */
-	public void printOrder()
+	public String printOrder()
 	{ 
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String order = "*******************************************\n";
+		order += "ORDER ID: " + orderId + "\n";
+		order += "Date Ordered " + dateFormat.format(date) + "\n" + "\n";
+		order += "Item Description: " + orderL.getItem().getName() + "\n";
+		order += "Amount Ordered: " + orderL.getQuantity() + "\n";
+		order += "SupplierID: " + orderL.getItem().getSupplierId() + "\n";
+		order += "*******************************************";
+		
+		return order;
 		// NEEDS TO SEND STRING TO SERVER CLIENT COMMUNICAITON TO PRINT TO GUI.
 		/*
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

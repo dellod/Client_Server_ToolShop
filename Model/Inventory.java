@@ -37,10 +37,10 @@ public class Inventory
 	 * Prints item contents of specified index in inventory list.
 	 * @param index is the index of the inventory list to print item.
 	 */
-	public void listItem(int index)
+	public String listItem(int index)
 	{
 		// HAVE TO CHANGE THIS SO IT DOES NOT PRINT TO CONSOLE BUT INSTEAD THE GUI
-		//System.out.println(inventory.get(index).toStringItem()); 
+		return inventory.get(index).toString(); 
 	}
 
 	/**
@@ -56,34 +56,36 @@ public class Inventory
 	 * Deletes item by searching its ID in the inventory list.
 	 * @param id is the item ID of the item that is going to be deleted.
 	 */
-	public void deleteItem(int id)
+	public Item deleteItem(int id)
 	{
 		int indexDel;
 		Item delItem = searchToolId(id);
 		indexDel = retrieveIndex(delItem);
 		if(indexDel < 0)
 		{
-			System.out.println("Could not delete item.");
-			return;
+			//System.out.println("Could not delete item."); // Have to make this appear on the GUI
+			return null; // then make it so if == null then display could not delete item.
 		}
 		inventory.remove(indexDel);
+		return delItem;
 	}
 	
 	/**
 	 * Deletes item by searching its name in the inventory list.
 	 * @param name is the name of the item that is going to be deleted.
 	 */
-	public void deleteItem(String name)
+	public Item deleteItem(String name)
 	{
 		int indexDel;
 		Item delItem = searchToolName(name);
 		indexDel = retrieveIndex(delItem);
 		if(indexDel < 0)
 		{
-			System.out.println("Could not delete item.");
-			return;
+			//System.out.println("Could not delete item."); // Have to make this appear on the GUI
+			return null;
 		}
 		inventory.remove(indexDel);
+		return delItem;
 	}
 	
 	/**
@@ -142,5 +144,10 @@ public class Inventory
 			System.out.println("Item does not exist.");
 		}
 		return index;
+	}
+	
+	public String returnError(String s)
+	{
+		return s;
 	}
 }

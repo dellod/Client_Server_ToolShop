@@ -39,7 +39,7 @@ public class Supplier
 		int tokenIndex = 1;
 		String temp = "";
 		
-		while(index < s.length())
+		while(index < s.length()) // THIS WORKs BUT ONLY FOR .txt FILE
 		{
 			if(s.charAt(index) != ';' || tokenIndex != 4)
 			{

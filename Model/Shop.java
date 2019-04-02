@@ -101,4 +101,13 @@ public class Shop
 		orders.add(o);
 	}
 	
+	
+	
+	public String listItemAt(int index)
+	{
+		return collection.listItem(index);
+	}
+	
+	
+	
 }
