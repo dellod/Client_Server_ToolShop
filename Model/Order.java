@@ -71,15 +71,18 @@ public class Order implements Serializable
 	 * Prints the order specifics out with the order ID, date, item description,
 	 * amount ordered, and the supplier ID.
 	 */
-	public void printOrder()
+	public String toString()
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		System.out.println("*******************************************");
+		
+		return ("ORDER ID: " + orderId + "\n" + "Date Ordered " + dateFormat.format(date) + "\n\n" + "Item Description: " + orderL.getItem().getName() + "\n" +
+					"Amount Ordered: " + orderL.getQuantity() + "\n" + "SupplierID: " + orderL.getItem().getSupplierId() + "\n");
+		/*
 		System.out.println("ORDER ID: " + orderId);
 		System.out.println("Date Ordered " + dateFormat.format(date) + "\n");
 		System.out.println("Item Description: " + orderL.getItem().getName());
 		System.out.println("Amount Ordered: " + orderL.getQuantity());
-		System.out.println("SupplierID: " + orderL.getItem().getSupplierId());
-		System.out.println("*******************************************");
+		System.out.println("SupplierID: " + orderL.getItem().getSupplierId());*/
+		
 	}
 }

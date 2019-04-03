@@ -44,14 +44,12 @@ public class GUI extends JFrame
 	
 	JButton quit;
 	
+	Client client;
+	
 	private JList<String> listArea;
 	private DefaultListModel<String> list;
 	private JScrollPane listScroll;
-	
 	private MainListener listener;
-	
-	Client client;
-	
 	private Border panelEdge = BorderFactory.createEtchedBorder(); //eteched border
 	
 	public GUI(Client c)
@@ -62,6 +60,11 @@ public class GUI extends JFrame
 		setLayout(new BorderLayout());
 		setSize(500, 500);
 		setDefaultCloseOperation(this.EXIT_ON_CLOSE); // allows termination when exit is pressed.
+	}
+	
+	public DefaultListModel<String> getList()
+	{
+		return list;
 	}
 	
 	private void buildNorth() // Title area.
@@ -123,23 +126,11 @@ public class GUI extends JFrame
 		add("South", southPanel);
 	}
 	
-	private void buildEast()
-	{
-		
-	}
-	
-	private void buildWest()
-	{
-		
-	}
-	
 	public void buildAll()
 	{
 		buildNorth();
 		buildSouth();
 		buildCenter();
-		buildEast();
-		buildWest();
 		
 		setVisible(true);
 	}
@@ -162,7 +153,7 @@ public class GUI extends JFrame
 		}
 	}
 	
-	public void searchWindow() // DO THIS LAST...
+	public void searchWindow()
 	{
 		SearchListener searchListen = new SearchListener(this);
 		
@@ -202,7 +193,7 @@ public class GUI extends JFrame
 	
 	public String checkWindow()
 	{
-		String id = JOptionPane.showInputDialog("Enter ID of tool to check its stock ");
+		String id = JOptionPane.showInputDialog(this, "Enter ID of tool to check its stock ");
 		 
 		return id;
 	}
@@ -214,7 +205,7 @@ public class GUI extends JFrame
 		
 		JComponent[] inputs = new JComponent[] {new JLabel("Tool ID: "), id, new JLabel("Decrease Amount: "), decreaseAmount};
 		Object[] options = {"Decrease" , "Cancel"};
-		int result = JOptionPane.showOptionDialog(null,  inputs, "Decrease tool quantity",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+		int result = JOptionPane.showOptionDialog(this,  inputs, "Decrease tool quantity",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
 		
 		if(result == JOptionPane.YES_NO_OPTION)
 		{
@@ -223,9 +214,13 @@ public class GUI extends JFrame
 		return "";
 	}
 	
-	public static void main(String[] args)
+	public void createMessageDialog(String message, String title)
 	{
-		GUI test = new GUI(new Client("localhost", 8099));
-		test.buildAll();
+		JOptionPane.showMessageDialog(this, message, title, JOptionPane.PLAIN_MESSAGE);
+	}
+	
+	public void createErrorDialog(String message, String title)
+	{
+		JOptionPane.showMessageDialog(this, message, title, JOptionPane.ERROR_MESSAGE);
 	}
 }
