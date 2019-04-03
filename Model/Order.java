@@ -1,5 +1,5 @@
 package Model;
-
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.Random;
  * @author Daryl Dang
  * @since Feb 5, 2019
  */
-public class Order 
+public class Order implements Serializable
 {
 	/**
 	 * The ID of the order that is to be randomly generated.
@@ -71,20 +71,8 @@ public class Order
 	 * Prints the order specifics out with the order ID, date, item description,
 	 * amount ordered, and the supplier ID.
 	 */
-	public String printOrder()
-	{ 
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		String order = "*******************************************\n";
-		order += "ORDER ID: " + orderId + "\n";
-		order += "Date Ordered " + dateFormat.format(date) + "\n" + "\n";
-		order += "Item Description: " + orderL.getItem().getName() + "\n";
-		order += "Amount Ordered: " + orderL.getQuantity() + "\n";
-		order += "SupplierID: " + orderL.getItem().getSupplierId() + "\n";
-		order += "*******************************************";
-		
-		return order;
-		// NEEDS TO SEND STRING TO SERVER CLIENT COMMUNICAITON TO PRINT TO GUI.
-		/*
+	public void printOrder()
+	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		System.out.println("*******************************************");
 		System.out.println("ORDER ID: " + orderId);
@@ -93,6 +81,5 @@ public class Order
 		System.out.println("Amount Ordered: " + orderL.getQuantity());
 		System.out.println("SupplierID: " + orderL.getItem().getSupplierId());
 		System.out.println("*******************************************");
-		*/
 	}
 }

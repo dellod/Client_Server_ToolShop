@@ -1,13 +1,15 @@
 package Model;
+
+import java.io.Serializable;
+
 /**
  * This class provides the item with its details to be ordered for the shop.
  * 
- * ############ NEW: Designing to work for client-server.
  * @author Daryl Dang
  * @since Feb 5, 2019
  *
  */
-public class OrderLine 
+public class OrderLine  implements Serializable
 {
 	/**
 	 * Item that is to be ordered.

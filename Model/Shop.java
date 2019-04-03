@@ -1,13 +1,11 @@
 package Model;
-
 import java.util.ArrayList;
 
 /**
- * 
  * This class is a general shops, with required characteristics.
  * Has the main collection (inventory) of items, orders list, and
  * suppliers list.
- * ############ NEW: Designing to work for client-server.
+ * 
  * @author Daryl Dang
  * @since Feb 5, 2019
  */
@@ -101,13 +99,5 @@ public class Shop
 		orders.add(o);
 	}
 	
-	
-	
-	public String listItemAt(int index)
-	{
-		return collection.listItem(index);
-	}
-	
-	
-	
 }
+

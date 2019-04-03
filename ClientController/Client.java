@@ -47,7 +47,6 @@ public class Client {
 					{
 						ArrayList r = (ArrayList) record;
 						
-						
 						if(r.isEmpty())
 						{
 							System.out.println("Empty");
@@ -70,7 +69,7 @@ public class Client {
 						{
 							for(Order o: (ArrayList<Order>) r)
 							{
-									System.out.println(o);
+									o.printOrder();
 							}
 						}
 						
