@@ -122,7 +122,7 @@ public class Server
 	public void communicate() 
 	{
 		String input; // From client
-		
+		Shop oldShop = theShop;
 		while(true) 
 		{
 			try 
@@ -130,11 +130,12 @@ public class Server
 				theSocket = serverSocket.accept();
 				socketIn = new BufferedReader(new InputStreamReader(theSocket.getInputStream()));
 				objectOut = new ObjectOutputStream(theSocket.getOutputStream());
+				
 				while(true) 
 				{
 					input = socketIn.readLine();
 					System.out.println(input);
-					
+					theShop = oldShop;
 					switch(input)
 					{
 						case "1": // list supplier
@@ -143,28 +144,30 @@ public class Server
 							{
 								objectOut.writeObject(theShop.getSuppliers());
 								objectOut.flush();
+								objectOut.reset();
 							}
 							catch(IOException e)
 							{
 								System.err.println("Error writing object");
 								e.printStackTrace();
 							}
-							
 							break;
 						
 						case "2": // list tools
 							sendString("2");
+
 							try
 							{
+								theShop.setCollection(theShop.getCollection().getInventory());
 								objectOut.writeObject(theShop.getCollection().getInventory());
 								objectOut.flush();
+								objectOut.reset();
 							}
 							catch(IOException e)
 							{
 								System.err.println("Error writing object");
 								e.printStackTrace();
 							}
-							
 							break;
 							
 						case "3": // search name
@@ -176,6 +179,7 @@ public class Server
 							{
 								objectOut.writeObject(theShop.getCollection().searchToolName(name));
 								objectOut.flush();
+								objectOut.reset();
 							}
 							catch(IOException e)
 							{
@@ -195,6 +199,7 @@ public class Server
 								System.out.println("Not a valid ID!");
 								objectOut.writeObject(null);
 								objectOut.flush();
+								objectOut.reset();
 								break;
 							}
 							Item l = theShop.getCollection().searchToolId(Integer.parseInt(id4));
@@ -203,6 +208,7 @@ public class Server
 							{
 								objectOut.writeObject(l);
 								objectOut.flush();
+								objectOut.reset();
 							}
 							catch(IOException e)
 							{
@@ -229,6 +235,7 @@ public class Server
 							{
 								objectOut.writeObject(theShop.getCollection().getInventory().get(n5).getStock());
 								objectOut.flush();
+								objectOut.reset();
 							}
 							catch(IOException e)
 							{
@@ -273,6 +280,7 @@ public class Server
 							{
 								objectOut.writeObject(theShop.getCollection().getInventory().get(n6).getStock());
 								objectOut.flush();
+								objectOut.reset();
 							}
 							catch(IOException e)
 							{
@@ -289,6 +297,7 @@ public class Server
 							{
 								objectOut.writeObject(theShop.getOrders());
 								objectOut.flush();
+								objectOut.reset();
 							}
 							catch(IOException e)
 							{
