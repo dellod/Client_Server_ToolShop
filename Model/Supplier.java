@@ -44,7 +44,7 @@ public class Supplier implements Serializable
 		
 		while(index < s.length()) // THIS WORKs BUT ONLY FOR .txt FILE
 		{
-			if(s.charAt(index) != ';' || tokenIndex != 5)
+			if(s.charAt(index) != ';' /*|| tokenIndex != 5*/)
 			{
 				temp += s.charAt(index);
 			}
@@ -67,13 +67,7 @@ public class Supplier implements Serializable
 						temp = "";
 						tokenIndex++;
 						break;
-					case 4:
-						contactName = temp;
-						temp = "";
-						tokenIndex++;
-						break;
 				}
-				
 			}
 			index++;
 		}

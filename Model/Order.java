@@ -75,8 +75,8 @@ public class Order implements Serializable
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		
-		return ("ORDER ID: " + orderId + "\n" + "Date Ordered " + dateFormat.format(date) + "\n\n" + "Item Description: " + orderL.getItem().getName() + "\n" +
-					"Amount Ordered: " + orderL.getQuantity() + "\n" + "SupplierID: " + orderL.getItem().getSupplierId() + "\n");
+		return ("ORDER ID: " + orderId + ";" + "DATE:" + dateFormat.format(date) + ";" + "ITEM: " + orderL.getItem().getName() + ";" +
+					"AMOUNT: " + orderL.getQuantity() + ";" + "SUPPLIER ID: " + orderL.getItem().getSupplierId());
 		/*
 		System.out.println("ORDER ID: " + orderId);
 		System.out.println("Date Ordered " + dateFormat.format(date) + "\n");

@@ -1,4 +1,3 @@
-
 package View;
 
 import javax.swing.*;
@@ -7,47 +6,98 @@ import javax.swing.border.Border;
 import ClientController.Client;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
- * MAR 30 ####### -possibly add selection pane at the south panel to see choice
- * @author Daryl
+ * This class is the main graphical user interface.
+ * Where the user can make changes and view contents of a Toolshop.
+ * 
+ * @author Daryl, Ilyas, Will
  *
  */
 public class GUI extends JFrame
 {
+	JTextField selectedTextField;
+	
 	/**
 	 * Represents the list button, and will display all the tools or suppliers.
 	 */
 	JButton lists;
-	
+		
+		/**
+		 * The buttons that belong int the list window.
+		 */
 		Object[] optionsList = {"Tools", "Suppliers"};
 	
-	
+	/**
+	 * Represents the search button, and will display the tool that is searched for if found.
+	 */
 	JButton search;
 	
+		/**
+		 * This is the search dialog that pops up from the search button being pressed.
+		 */
 		JDialog searchW;
+		
+		/**
+		 * The text input for the name tab.
+		 */
 		TextField nameIn; // have to add this to the whole class so you can use .getText when button is pressed.
+		
+		/**
+		 * The text input for the id tab.
+		 */
 		TextField idIn;
+		
+		/**
+		 * The search button for the name tab.
+		 */
 		JButton searchN;
+		
+		/**
+		 * The search button for the id tab.
+		 */
 		JButton searchI;
 		
-	
+	/**
+	 * Represents the check button, and will display the quantity of the tool being searched for.
+	 */
 	JButton check;
 	
+	/**
+	 * Represents the decrease button, and will decrease the quantity specified for the specific tool.
+	 */
 	JButton decrease;
 	
+		/**
+		 * The ID text input for the decrease dialog.
+		 */
 		JTextField id;
-		JTextField decreaseAmount;
 		
+		/**
+		 * The amount to decrease text for the decrease dialog.
+		 */
+		JTextField decreaseAmount;
+	
+	/**
+	 * Represents the order button, and will display the current order list.
+	 */
 	JButton order;
 	
+	/**
+	 * Represents the quit button, and will terminate the GUI as well as the current running client.
+	 */
 	JButton quit;
 	
+	/**
+	 * Is the client that is attached to the GUIs.
+	 */
 	Client client;
 	
-	private JList<String> listArea;
-	private DefaultListModel<String> list;
+	/**
+	 * 
+	 */
+	JList<String> listArea;
+	DefaultListModel<String> list;
 	private JScrollPane listScroll;
 	private MainListener listener;
 	private Border panelEdge = BorderFactory.createEtchedBorder(); //eteched border
@@ -79,11 +129,12 @@ public class GUI extends JFrame
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBackground(new Color(0, 0, 150)); //sets the center to blue
 		centerPanel.setBorder(panelEdge);
+		ListListener listListen = new ListListener(this);
 		
 		list = new DefaultListModel<String>();
 		listArea = new JList<String>(list);
 		
-		String width = "123456789012345678901234567890123456789012345678901234567890"; // controls the width
+		String width = "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"; // controls the width
 		listArea.setPrototypeCellValue(width);
 		listArea.setFont(new Font("Times New Roman", Font.BOLD, 12)); // sets font to Times New Roman (BOLD) size 12
 		listArea.setVisibleRowCount(20); // controls the height
@@ -94,17 +145,23 @@ public class GUI extends JFrame
 		list.addElement("Select options below");
 		centerPanel.add(listScroll);
 		
+		listArea.addListSelectionListener(listListen);
+		
 		add("Center", centerPanel);
 	}
 	
 	private void buildSouth() // Button area.
 	{
 		JPanel southPanel = new JPanel();
+		southPanel.setLayout(new BorderLayout());
+		JPanel buttons = new JPanel();
+		
+		selectedTextField = new JTextField(20);
 		lists = (new JButton("List"));
 		search = (new JButton("Search"));
 		check = (new JButton("Check"));
 		decrease = (new JButton("Decrease"));
-		order = (new JButton("Order"));
+		order = (new JButton("Orders"));
 		quit = (new JButton("Quit"));
 		
 		// Add action to each main menu button.
@@ -116,13 +173,15 @@ public class GUI extends JFrame
 		quit.addActionListener(listener);
 		
 		// Add buttons to the south panel.
-		southPanel.add(lists);
-		southPanel.add(search);
-		southPanel.add(check);
-		southPanel.add(decrease);
-		southPanel.add(order);
-		southPanel.add(quit);
-			
+		//southPanel.add
+		southPanel.add("North", selectedTextField);
+		buttons.add(lists);
+		buttons.add(search);
+		buttons.add(check);
+		buttons.add(decrease);
+		buttons.add(order);
+		buttons.add(quit);
+		southPanel.add("South", buttons);
 		add("South", southPanel);
 	}
 	
@@ -132,6 +191,7 @@ public class GUI extends JFrame
 		buildSouth();
 		buildCenter();
 		
+		pack();
 		setVisible(true);
 	}
 	
