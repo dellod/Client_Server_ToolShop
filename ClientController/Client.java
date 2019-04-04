@@ -31,7 +31,6 @@ public class Client
 			theSocket = new Socket(serverName,port);
 			objectIn = new ObjectInputStream(theSocket.getInputStream());
 			writeServer = new PrintWriter(theSocket.getOutputStream());
-			socketIn = new BufferedReader(new InputStreamReader(theSocket.getInputStream()));
 		}
 		catch(IOException e) 
 		{
@@ -50,7 +49,7 @@ public class Client
 			{
 				while(true)
 				{
-					String input = socketIn.readLine();
+					String input = (String)objectIn.readObject();
 					System.out.println("From socket " + input);
 					
 					//record = objectIn.readObject();
@@ -92,7 +91,7 @@ public class Client
 							break;
 							
 						case "3": // Search name
-							String name3 = socketIn.readLine();
+							String name3 = (String)objectIn.readObject();
 							Item recordItem3 = (Item)objectIn.readObject();
 							if(recordItem3 == null)
 							{
@@ -104,7 +103,7 @@ public class Client
 							break;
 							
 						case "4": // Search ID
-							String id4 = socketIn.readLine();
+							String id4 = (String) objectIn.readObject();
 							Item recordItem4 = (Item)objectIn.readObject();
 							if(recordItem4 == null)
 							{
@@ -115,7 +114,7 @@ public class Client
 							break;
 							
 						case "5": // Check stock
-							String id5 = socketIn.readLine();
+							String id5 = (String) objectIn.readObject();
 							int recordItem5 = (Integer)objectIn.readObject();
 							if(recordItem5 < 0)
 							{
@@ -126,9 +125,9 @@ public class Client
 							break;
 							
 						case "6": // Decrease stock
-							String id6 = socketIn.readLine();
-							String reduced = socketIn.readLine();
-							String mes = socketIn.readLine();
+							String id6 = (String)objectIn.readObject();
+							String reduced = (String)objectIn.readObject();
+							String mes = (String)objectIn.readObject();
 							int recordItem6 = (Integer)objectIn.readObject();
 							if(recordItem6 < 0) // THIS IS ACTUALLY WRONG, THE STOCK COULD BE TURNED NEGATIVE FOR THE FIRST TIME. HAVE TO MAKE IT SENSE THIS SCENARIO
 							{

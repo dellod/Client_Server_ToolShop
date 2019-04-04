@@ -107,11 +107,16 @@ public class Server
 			return false;
 		}
 	}
-	
+
+
 	public void sendString(String s)
 	{
-		writeClient.println(s);
-		writeClient.flush();
+		try {
+			objectOut.writeObject(s);
+			objectOut.flush();
+		}catch (IOException e){
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public void communicate() 
@@ -125,7 +130,6 @@ public class Server
 				theSocket = serverSocket.accept();
 				socketIn = new BufferedReader(new InputStreamReader(theSocket.getInputStream()));
 				objectOut = new ObjectOutputStream(theSocket.getOutputStream());
-				writeClient = new PrintWriter(theSocket.getOutputStream());
 				while(true) 
 				{
 					input = socketIn.readLine();
