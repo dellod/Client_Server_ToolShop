@@ -74,6 +74,7 @@ public class Client
 							break;
 							
 						case "2": // List tools
+							ArrayList<Item> recordTool = new ArrayList<Item>((ArrayList<Item>)objectIn.readObject());
 							app.getList().addElement("************************* TOOLS LIST *************************");
 							if(recordTool.isEmpty())
 							{
