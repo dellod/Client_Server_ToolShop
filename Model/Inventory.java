@@ -4,8 +4,7 @@ import java.util.ArrayList;
 /**
  * This class provides a list of items that are available in the inventory.
  * 
- * ############ NEW: Designing to work for client-server.
- * @author Daryl Dang
+ * @author Daryl, Ilyas, Will
  * @since Feb 5, 2019
  */
 public class Inventory 
@@ -33,13 +32,14 @@ public class Inventory
 		return inventory;
 	}
 	
+
 	/**
-	 * Prints item contents of specified index in inventory list.
-	 * @param index is the index of the inventory list to print item.
+	 * Retrieves item at specified index as a string.
+	 * @param index of the inventory.
+	 * @return String at specified index of inventory.
 	 */
 	public String listItem(int index)
 	{
-		// HAVE TO CHANGE THIS SO IT DOES NOT PRINT TO CONSOLE BUT INSTEAD THE GUI
 		return inventory.get(index).toString(); 
 	}
 
@@ -63,8 +63,7 @@ public class Inventory
 		indexDel = retrieveIndex(delItem);
 		if(indexDel < 0)
 		{
-			//System.out.println("Could not delete item."); // Have to make this appear on the GUI
-			return null; // then make it so if == null then display could not delete item.
+			return null; 
 		}
 		inventory.remove(indexDel);
 		return delItem;
@@ -81,7 +80,6 @@ public class Inventory
 		indexDel = retrieveIndex(delItem);
 		if(indexDel < 0)
 		{
-			//System.out.println("Could not delete item."); // Have to make this appear on the GUI
 			return null;
 		}
 		inventory.remove(indexDel);
@@ -144,10 +142,5 @@ public class Inventory
 			System.out.println("Item does not exist.");
 		}
 		return index;
-	}
-	
-	public String returnError(String s)
-	{
-		return s;
 	}
 }

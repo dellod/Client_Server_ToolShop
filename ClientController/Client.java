@@ -1,11 +1,8 @@
 package ClientController;
 
-import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -15,14 +12,43 @@ import Model.Item;
 import Model.Order;
 import Model.Supplier;
 
+/**
+ * This is the client of the application.
+ * This communicates from the user to the server to extract and change information
+ * in the model. Also, utilizes and constructs the GUI to create an accessible
+ * interface for the user.
+ * 
+ * @author Daryl, Ilyas, Will
+ *
+ */
 public class Client 
 {
+	/**
+	 * Main GUI application of current running client.
+	 */
 	GUI app;
-	private Socket theSocket;
-	private ObjectInputStream objectIn;
-	private PrintWriter writeServer;
-	private BufferedReader socketIn; // from server
 	
+	/**
+	 * Main communication socket between client and server.
+	 */
+	private Socket theSocket;
+	
+	/**
+	 * Main object input stream, to receive serialized objects.
+	 */
+	private ObjectInputStream objectIn;
+	
+	/**
+	 * Writer that writes strings to the socket of the server.
+	 */
+	private PrintWriter writeServer;
+	
+	/**
+	 * Constructs client with a name for the server, and a specified port to link
+	 * the server.
+	 * @param serverName name of the socket.
+	 * @param port specified port to connect the client to the server.
+	 */
 	public Client(String serverName, int port) 
 	{
 		app = new GUI(this);
@@ -38,11 +64,12 @@ public class Client
 		}
 	}
 
+	/**
+	 * Receives and communicates specified information from the server to create
+	 * specific actions/events on the GUI.
+	 */
 	public void communicate()
 	{
-		ArrayList<Supplier> s = new ArrayList<Supplier>();
-		ArrayList<Item> i = new ArrayList<Item>();
-		
 		while(true)
 		{
 			try
@@ -51,9 +78,7 @@ public class Client
 				{
 					String input = (String)objectIn.readObject();
 					System.out.println("From socket " + input);
-					
-					//record = objectIn.readObject();
-					
+		
 					switch(input)
 					{
 						case "1": // List suppliers
@@ -129,7 +154,7 @@ public class Client
 							String reduced = (String)objectIn.readObject();
 							String mes = (String)objectIn.readObject();
 							int recordItem6 = (Integer)objectIn.readObject();
-							if(recordItem6 < 0) // THIS IS ACTUALLY WRONG, THE STOCK COULD BE TURNED NEGATIVE FOR THE FIRST TIME. HAVE TO MAKE IT SENSE THIS SCENARIO
+							if(recordItem6 < 0) // STOCK could be negative.
 							{
 								app.createMessageDialog(id6 + " could not be decreased.\n", "Decrease Quantity");
 								break;
@@ -153,104 +178,87 @@ public class Client
 							app.getList().addElement("**************************************************************");
 							break;	
 					}
-					/*
-					if(record instanceof ArrayList)
-					{
-						ArrayList r = (ArrayList) record;
-						
-						if(r.isEmpty())
-						{
-							app.getList().addElement("Nothing to print!");
-						}
-						else if(r.get(0) instanceof Supplier)
-						{
-							app.getList().addElement("*********************** SUPPLIERS LIST ***********************");
-							for(Supplier t : (ArrayList<Supplier>) r)
-							{
-								app.getList().addElement(t.toString());
-							}
-							app.getList().addElement("**************************************************************");
-						}
-						else if(r.get(0) instanceof Item)
-						{
-							app.getList().addElement("************************* TOOLS LIST *************************");
-							for(Item t : (ArrayList<Item>) r)
-							{
-								app.getList().addElement(t.toString());
-							}
-							app.getList().addElement("**************************************************************");
-						}
-						else if(r.get(0) instanceof Order)
-						{
-							for(Order o: (ArrayList<Order>) r)
-							{
-									o.printOrder();
-							}
-						}
-						
-					}
-					else if(record instanceof Item)
-					{
-						app.createMessageDialog(record.toString(), "Item found!");
-						//System.out.println((Item) record);
-					}
-					else if(record instanceof Integer)
-					{
-						app.createMessageDialog("The stock for that item is " + record, "Stock count");
-						//System.out.println("Stock is: " + (Integer) record);
-					}
-					else
-					{
-						app.createErrorDialog("Invalid input!", "Error");
-					}*/
-					
-		
 				}
 			}
 			catch(EOFException e)
 			{
-				System.err.println("Could not read file");
+				e.printStackTrace();
 			}
 			catch(ClassNotFoundException e)
 			{
-				e.getMessage();
+				e.printStackTrace();
 			}
 			catch(IOException e)
 			{
-				e.getMessage();
+				e.printStackTrace();
 			}
 		}
-		
 	}
 	
+	/**
+	 * Sends string towards the server.
+	 * @param s String to be sent towards the server.
+	 */
 	public void sendString(String s) 
 	{
 		writeServer.println(s);
 		writeServer.flush();
 	}
-	public void listSuppliers() {
+	
+	/**
+	 * Retrieves list of suppliers (Case 1).
+	 */
+	public void listSuppliers() 
+	{
 		sendString("1");
-		System.out.println("list suppliers");
+		System.out.println("List suppliers.");
 	}
-	public void listTools() {
+	/**
+	 * Retrieves list of tools (Case 2).
+	 */
+	public void listTools() 
+	{
 		sendString("2");
-		System.out.println("list tools");
+		System.out.println("List tools.");
 	}
-	public void searchName(String name) {
+	
+	/**
+	 * Retrieves the item being searched by name (Case 3).
+	 * @param name String to be searched in tools list by name.
+	 */
+	public void searchName(String name) 
+	{
 		sendString("3");
 		sendString(name);
 		System.out.println("Searching name: " + name);
 	}
-	public void searchID(String ID) {
+	
+	/**
+	 * Retrieves the item being searched by ID (Case 4).
+	 * @param ID String to be searched in tools list by ID.
+	 */
+	public void searchID(String ID) 
+	{
 		sendString("4");
 		sendString(ID);
 		System.out.println("Searching id: " + ID);
 	}
+	
+	/**
+	 * Retrieves the stock of item being searched by ID (Case 5).
+	 * @param ID String to be searched for, for its stock count.
+	 */
 	public void check(String ID) {
 		sendString("5");
 		sendString(ID);
 		System.out.println("Searching id for checking stock: " + ID);
 	}
+	
+	/**
+	 * Decreases the stock of item being searched by ID (Case 6).
+	 * @param ID String to be searched for to decrease stock.
+	 * @param amount the amount to decrease the stock by.
+	 */
 	public void decrease(String ID, String amount) 
 	{
 		sendString("6");
@@ -258,7 +266,12 @@ public class Client
 		sendString(amount);
 		System.out.println("Going to decrease item id: " + ID + " by this amount: " + amount);
 	}
-	public void order() {
+	
+	/**
+	 * Prints the list of possible orders for the tool shop.
+	 */
+	public void order() 
+	{
 		
 		sendString("7");
 		System.out.println("printing orders...");		
@@ -267,10 +280,8 @@ public class Client
 	public static void main(String[] args) 
 	{
 		Client c = new Client("localhost", 8099);
-		//GUI test = new GUI(c);
-		c.app.buildAll();
+		c.app.buildAll(); // Builds GUI
 		c.communicate();
-		
 	}
 
 }

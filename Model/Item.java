@@ -5,8 +5,7 @@ import java.io.Serializable;
 /**
  * This class provides the details and specifications of the items (tools).
  * 
- * ############ NEW: Designing to work for client-server.
- * @author Daryl Dang
+ * @author Daryl, Ilyas, Will
  * @since Feb 5, 2019
  */
 public class Item implements Serializable

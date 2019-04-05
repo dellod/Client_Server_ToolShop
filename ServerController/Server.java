@@ -17,16 +17,52 @@ import Model.OrderLine;
 import Model.Shop;
 import Model.Supplier;
 
+/**
+ * This is the main server of the application.
+ * This communicates with the client to send/update information on both sides,
+ * while also retrieving/updating information in the model.
+ * 
+ * @author Daryl, Ilyas, Will
+ *
+ */
 public class Server 
 {
+	/**
+	 * The object output stream to send serialized objects to the client.
+	 */
 	private ObjectOutputStream objectOut;
-	private BufferedReader socketIn;
-	private ServerSocket serverSocket;
-	private Socket theSocket;
-	private ExecutorService pool;
-	private Shop theShop;
-	private PrintWriter writeClient; // send strings to client
 	
+	/**
+	 * The input reader for string information.
+	 */
+	private BufferedReader socketIn;
+	
+	/**
+	 * The main server socket.
+	 */
+	private ServerSocket serverSocket;
+	
+	/**
+	 * Socket that connects the client and server.
+	 */
+	private Socket theSocket;
+	
+	/**
+	 * The main shop of the server, that the clients will have and be able
+	 * to access.
+	 */
+	private Shop theShop;
+	
+	/**
+	 * Pool for threads.
+	 */
+	private ExecutorService pool; // THREAD POOL NOT FUNCTIONAL YET.
+	
+	/**
+	 * Constructs Server by setting the serverSocet to a new ServerSocket
+	 * via port number.
+	 * @param port is the number to set the serverSocket to.
+	 */
 	public Server(int port) 
 	{
 		try 
@@ -37,10 +73,10 @@ public class Server
 		{
 			e.printStackTrace();
 		}
-		pool= Executors.newCachedThreadPool();
+		pool= Executors.newCachedThreadPool(); // THREAD POOL NOT FUNCTIOAL YET.
 		System.out.println("Server is now working!");
 		
-		/********************READING TXT FILES********************/
+		/********************READING TXT FILES********************/ // CHANGE TO DATABASE LATER.
 		theShop = new Shop(); // Main store.
 		theShop.setOrders(new ArrayList<Order>());
 		Item i; // Temporary item used in reading file.txt.
@@ -108,17 +144,27 @@ public class Server
 		}
 	}
 
-
+	/**
+	 * Sends strings to the client by writing to Object stream.
+	 * @param s String to be sent to the client.
+	 */
 	public void sendString(String s)
 	{
-		try {
+		try 
+		{
 			objectOut.writeObject(s);
 			objectOut.flush();
-		}catch (IOException e){
+		}
+		catch (IOException e)
+		{
 			System.out.println(e.getMessage());
 		}
 	}
 	
+	/**
+	 * Receives and communicates specified instructions/information from the client 
+	 * side to change or gather data from the Model.
+	 */
 	public void communicate() 
 	{
 		String input; // From client
@@ -155,7 +201,6 @@ public class Server
 						
 						case "2": // list tools
 							sendString("2");
-
 							try
 							{
 								theShop.setCollection(theShop.getCollection().getInventory());
@@ -186,7 +231,6 @@ public class Server
 								System.err.println("Error writing object");
 								e.printStackTrace();
 							}
-							
 							break;
 							
 						case "4": // search id
@@ -215,7 +259,6 @@ public class Server
 								System.err.println("Error writing object");
 								e.printStackTrace();
 							}
-							
 							break;
 							
 						case "5": // check
@@ -242,7 +285,6 @@ public class Server
 								System.err.println("Error writing object");
 								e.printStackTrace();
 							}
-							
 							break;
 							
 						case "6": // decrease
@@ -287,8 +329,6 @@ public class Server
 								System.err.println("Error writing object");
 								e.printStackTrace();
 							}
-							
-							//System.out.println("6666");	
 							break;
 							
 						case "7": // orders
@@ -304,8 +344,6 @@ public class Server
 								System.err.println("Error writing object");
 								e.printStackTrace();
 							}
-							System.out.println("777");
-							
 							break;
 					}				
 			
@@ -317,6 +355,7 @@ public class Server
 			}
 		}
 	}
+	
 	public static void main (String args[]) 
 	{
 		Server s= new Server(8099);

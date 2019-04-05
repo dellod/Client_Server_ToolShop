@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Has the main collection (inventory) of items, orders list, and
  * suppliers list.
  * 
- * @author Daryl Dang
+ * @author Daryl, Ilyas, Will
  * @since Feb 5, 2019
  */
 public class Shop 
@@ -90,6 +90,7 @@ public class Shop
 	{
 		orders = o;
 	}
+	
 	/**
 	 * Adds o to the the list orders.
 	 * @param o of type Order to be added to the end of the list of orders.

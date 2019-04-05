@@ -3,11 +3,11 @@ package View;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import ClientController.Client;
 /**
- * MAR 30 #### -added actionlistener for main buttons 
- * 			   -stil have to add listeners for sub buttons.
- * @author Daryl
+ * This is the listener for the central application (starting window), which listens 
+ * for button events from this main panel.
+ * 
+ * @author Daryl, Ilyas, Will
  *
  */
 class MainListener implements ActionListener
@@ -18,12 +18,9 @@ class MainListener implements ActionListener
 	private GUI frame;
 	
 	/**
-	 * Constructs a MyListener object with a given GUI.
-	 * @param f is the main GUI of application to be assigned to the frame variable.
+	 * Constructs MainListener by attaching the GUI to frame.
+	 * @param f is the GUI to be attached to the frame.
 	 */
-	
-	//private Client controller;
-	
 	public MainListener(GUI f)
 	{
 		frame = f;
@@ -32,7 +29,7 @@ class MainListener implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(e.getSource() == frame.lists)
+		if(e.getSource() == frame.lists) // "List" pressed.
 		{
 			String list = frame.listWindow();
 			if(list == "tools")
@@ -45,22 +42,22 @@ class MainListener implements ActionListener
 			}
 			else
 			{
-				System.out.println("Something went wrong in list window."); // take out later.
+				System.out.println("Something went wrong in list window."); // Error checking.
 			}
-			System.out.println("list has been pressed");
+			System.out.println("'List' has been pressed.");
 		}
-		else if(e.getSource() == frame.search)
+		else if(e.getSource() == frame.search) // "Search" pressed.
 		{
 			frame.searchWindow();
-			System.out.println("search has been pressed");
+			System.out.println("'Search' has been pressed.");
 		}
-		else if(e.getSource() == frame.check)
+		else if(e.getSource() == frame.check) // "Check" pressed.
 		{
 			String id = frame.checkWindow();
 			frame.client.check(id);
-			System.out.println("check has been pressed");
+			System.out.println("'Check' has been pressed.");
 		}
-		else if(e.getSource() == frame.decrease)
+		else if(e.getSource() == frame.decrease) // "Decrease" pressed.
 		{
 			String dec = frame.decreaseWindow();
 			if(dec == "decrease")
@@ -69,21 +66,19 @@ class MainListener implements ActionListener
 			}
 			else
 			{
-				System.out.println("Something went wrong in decrease window."); // take out later.
+				System.out.println("Something went wrong in decrease window."); 
 			}
-			System.out.println("decrease has been pressed");
+			System.out.println("'Decrease' has been pressed.");
 		}
 		else if(e.getSource() == frame.order)
 		{
 			frame.client.order();
-			System.out.println("order has been pressed");
+			System.out.println("'Order' has been pressed.");
 		}
-		else if(e.getSource() == frame.quit) // Quit is pressed
+		else if(e.getSource() == frame.quit) // "Quit" is pressed
 		{
 			System.exit(1);
 		}
-		
-		
 	}
 	
 	

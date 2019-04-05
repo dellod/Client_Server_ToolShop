@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * This class provides the details of the order line.
  * 
- * @author Daryl Dang
+ * @author Daryl, Ilyas, Will
  * @since Feb 5, 2019
  */
 public class Order implements Serializable
@@ -77,12 +77,5 @@ public class Order implements Serializable
 		
 		return ("ORDER ID: " + orderId + ";" + "DATE:" + dateFormat.format(date) + ";" + "ITEM: " + orderL.getItem().getName() + ";" +
 					"AMOUNT: " + orderL.getQuantity() + ";" + "SUPPLIER ID: " + orderL.getItem().getSupplierId());
-		/*
-		System.out.println("ORDER ID: " + orderId);
-		System.out.println("Date Ordered " + dateFormat.format(date) + "\n");
-		System.out.println("Item Description: " + orderL.getItem().getName());
-		System.out.println("Amount Ordered: " + orderL.getQuantity());
-		System.out.println("SupplierID: " + orderL.getItem().getSupplierId());*/
-		
 	}
 }

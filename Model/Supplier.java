@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * This class provides the details of a supplier.
  * 
- * @author Daryl Dang
+ * @author Daryl, Ilyas, Will
  * @since Feb 5, 2019
  *
  */
@@ -101,7 +101,7 @@ public class Supplier implements Serializable
 	}
 	
 	/**
-	 * Gets varaible contactName of type String.
+	 * Gets variable contactName of type String.
 	 * @return contactName of type String.
 	 */
 	public String getContact()
@@ -111,7 +111,7 @@ public class Supplier implements Serializable
 	
 	/**
 	 * Converts variables and content of object Supplier to string format.
-	 * @return string that holds the conent of object Supplier.
+	 * @return string that holds the content of object Supplier.
 	 */
 	public String toString()
 	{
