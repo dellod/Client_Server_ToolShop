@@ -171,8 +171,12 @@ public class Item implements Serializable
 	 * Decreases the stock amount of item (simulating sale).
 	 * @param sold is the amount to decrease the stock by.
 	 */
-	public void decreaseStock(int sold)
+	public synchronized void decreaseStock(int sold)
 	{
 		stock = stock - sold;
+	}
+
+	public synchronized void setStock(int newQuantity){
+		this.stock += newQuantity;
 	}
 }

@@ -1,10 +1,11 @@
 package ServerController;
 
+import Model.Shop;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import Model.Shop;
 
 /**
  * This is the main server of the application.
@@ -49,8 +50,7 @@ public class Server
 		System.out.println("Server is now working!");
 		
 		theShop = new Shop(); // Main store.
-		//theShop.setOrders(new ArrayList<Order>());
-		//theShop.readText(theShop);
+
 		
 	}
 	/**
@@ -62,7 +62,7 @@ public class Server
 		{
 			try 
 			{
-				ViewController v=new ViewController(serverSocket.accept(),theShop);
+				ManagerController v = new ManagerController(serverSocket.accept(),theShop);
 				pool.execute(v);
 				
 				
@@ -75,7 +75,7 @@ public class Server
 	}
 	public static void main (String args[]) 
 	{
-		Server s= new Server(8099);
+		Server s = new Server(7000);
 		s.communicate();
 	}
 

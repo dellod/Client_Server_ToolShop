@@ -136,7 +136,7 @@ public class Database {
 
             tobe = old - num;
 
-            if(tobe > 0) {
+            if(tobe >= 0) {
 
                 ps = myConn.prepareStatement("UPDATE items SET quantity = ? WHERE id = ?");
                 System.out.println("test");
@@ -146,6 +146,25 @@ public class Database {
                 ps.executeUpdate();
 
             }
+
+        }catch (SQLException e){
+            System.out.println("No such item" + e.getErrorCode());
+        }
+
+    }
+
+    public synchronized void setQuantity(int id, int num) {
+        try {
+
+            System.out.println("CAME TO SET");
+
+            System.out.println(id);
+                PreparedStatement  ps = myConn.prepareStatement("UPDATE items SET quantity = ? WHERE id = ?");
+                ps.setInt(1, num);
+                ps.setInt(2, id);
+                //rs = ps.executeQuery();
+                ps.executeUpdate();
+
 
         }catch (SQLException e){
             System.out.println("No such item" + e.getErrorCode());
