@@ -159,7 +159,7 @@ public class Client
 								app.createMessageDialog(id6 + " could not be decreased.\n", "Decrease Quantity");
 								break;
 							}
-							app.createMessageDialog("Item "+ id6 + "'s stock has been reduced by " + reduced + " (" + mes + ").\n The new stock is " + recordItem6 +"!\n", "Decrease Quantity");
+							app.createMessageDialog("Item "+ id6 + "'s tried to be reduced by " + reduced + " (" + mes + ").\n The stock is " + recordItem6 +"!\n", "Decrease Quantity");
 							break;
 						case "7":
 							ArrayList<Order> recordOrd = (ArrayList<Order>)objectIn.readObject();
@@ -279,7 +279,7 @@ public class Client
 	
 	public static void main(String[] args) 
 	{
-		Client c = new Client("localhost", 8099);
+		Client c = new Client("10.13.170.15", 7000);
 		c.app.buildAll(); // Builds GUI
 		c.communicate();
 	}
