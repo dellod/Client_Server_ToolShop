@@ -5,16 +5,54 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+/**
+ * This class is a dialog that holds the login user interface.
+ * @author Daryl, Ilyas, Will
+ *
+ */
 public class LoginDialog extends JDialog
 {
+	/**
+	 * The username textfield.
+	 */
 	JTextField tfUser;
+	
+	/**
+	 * The password textfield.
+	 */
 	JPasswordField tfPass;
+	
+	/**
+	 * The label beside the username textfield.
+	 */
 	private JLabel lbUser;
+	
+	/**
+	 * The label beside the password textfield.
+	 */
 	private JLabel lbPass;
+	
+	/**
+	 * The login button.
+	 */
 	JButton login;
+	
+	/**
+	 * The quit button.
+	 */
 	JButton quit;
+	
+	/**
+	 * The listener for the LoginDialog, to detect when buttons are pressed.
+	 */
 	private LoginListener loginListener;
 	
+	/**
+	 * Constructs the login dialog given the main CustomerGUI application, designed in 
+	 * the way that the dialog must be dealt with first before being able to access the 
+	 * CustomerGUI.
+	 * @param parent the CustomerGUI to be sent to the LoginListener.
+	 */
 	public LoginDialog(CustomerGUI parent)
 	{
 		super(parent, "Login", true);
@@ -63,6 +101,5 @@ public class LoginDialog extends JDialog
         getContentPane().add(buttonArea, BorderLayout.PAGE_END);
         
         pack();
-        //setVisible(true); //problem here
 	}
 }

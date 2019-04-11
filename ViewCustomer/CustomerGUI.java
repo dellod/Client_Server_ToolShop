@@ -6,25 +6,59 @@ import javax.swing.border.Border;
 
 import ClientCustomer.CustomerClient;
 
+/**
+ * The main GUI for the customer.
+ * 
+ * @author Daryl, Ilyas, Will
+ *
+ */
 public class CustomerGUI extends JFrame
 {
+	/**
+	 * The listener for the login window
+	 */
 	LoginListener logListen;
 	
+	/**
+	 * Login window.
+	 */
 	private LoginDialog login;
 	
+	/**
+	 * The selction field for the customer.
+	 */
 	JTextField purchaseTextField;
 	
+	/**
+	 * Home button.
+	 */
 	JButton home;
 	
+	/**
+	 * Buy button.
+	 */
 	JButton buy;
 	
+	/**
+	 * Quit button.
+	 */
 	JButton quit;
 	
+	/**
+	 * The search bar for typing in text.
+	 */
 	TextField searchbar;
 	
+	/**
+	 * Search button.
+	 */
 	JButton search;
 	
+	/**
+	 * The client attached to the GUI application.
+	 */
 	CustomerClient custClient;
+	
 	/**
 	 * Elements of the main list that goes in listArea.
 	 */
@@ -35,13 +69,25 @@ public class CustomerGUI extends JFrame
 	 */
 	private JScrollPane listScroll;
 	
+	/**
+	 * The main listener (for buttons) of the Customer GUI.
+	 */
 	private CustomerListener custListener;
 	
+	/**
+	 * Central list area of application.
+	 */
 	JList<String> listArea;
 	
-	
+	/**
+	 * The edge style of the panel.
+	 */
 	private Border panelEdge = BorderFactory.createEtchedBorder();
 	
+	/**
+	 * Constructs the customer GUI given a customer client, c.
+	 * @param c the CustomerClient to to be assigned to the GUI.
+	 */
 	public CustomerGUI(CustomerClient c)
 	{
 		super("Customer Shopping Page");
@@ -51,22 +97,31 @@ public class CustomerGUI extends JFrame
 		setLogin(new LoginDialog(this)); //problem here
 		logListen = new LoginListener(getLogin(), this);
 		
-		
-		
 		setLayout(new BorderLayout()); // N, E, S, W, and Center
 		setDefaultCloseOperation(this.EXIT_ON_CLOSE); // Allows termination when exit is pressed.
 	}
 	
+	/**
+	 * Retrieves the list of type DefaultListModel.
+	 * @return list of type DefaultListModel<String>.
+	 */
 	public DefaultListModel<String> getList() 
 	{
 		return list;
 	}
 
+	/**
+	 * Sets the list of type DefaultListModel to list.
+	 * @param list the list of type DefaultListModel<String> to be assigned to list.
+	 */
 	public void setList(DefaultListModel<String> list) 
 	{
 		this.list = list;
 	}
 	
+	/**
+	 * Builds the Center area of the GUI borderlayout.
+	 */
 	private void buildCenter()
 	{
 		JPanel centerPanel = new JPanel();
@@ -91,6 +146,9 @@ public class CustomerGUI extends JFrame
 		add("Center", centerPanel);
 	}
 	
+	/**
+	 * Builds the North area of the GUI borderlayout.
+	 */
 	private void buildNorth()
 	{
 		JPanel northPanel = new JPanel();
@@ -115,6 +173,9 @@ public class CustomerGUI extends JFrame
 		quit.addActionListener(custListener);
 	}
 	
+	/**
+	 * Builds the South area of the GUI borderlayout.
+	 */
 	private void buildSouth()
 	{
 		JPanel southPanel = new JPanel();
@@ -127,7 +188,6 @@ public class CustomerGUI extends JFrame
 		add("South", southPanel);
 	}
 
-	
 	/**
 	 * Creates a normal plain message dialog.
 	 * @param message the main message of the dialog.
@@ -148,7 +208,9 @@ public class CustomerGUI extends JFrame
 		JOptionPane.showMessageDialog(this, message, title, JOptionPane.ERROR_MESSAGE);
 	}
 	
-
+	/**
+	 * Builds all areas of the borderlayout GUI (North, Center, South), as well as the initial login window.
+	 */
 	public void buildAll()
 	{
 		buildNorth();
@@ -161,10 +223,18 @@ public class CustomerGUI extends JFrame
 		getLogin().setVisible(true);
 	}
 
+	/**
+	 * Gets the login dialog.
+	 * @return login of type LoginDialog.
+	 */
 	public LoginDialog getLogin() {
 		return login;
 	}
 
+	/**
+	 * Sets the login dialog.
+	 * @param login is of type LoginDialog to be set to login.
+	 */
 	public void setLogin(LoginDialog login) {
 		this.login = login;
 	}

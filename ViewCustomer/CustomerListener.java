@@ -3,10 +3,24 @@ package ViewCustomer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The main listener of the Customer GUI.
+ * Listens for the main button presses.
+ *
+ * @author Daryl, Ilyas, Will
+ *
+ */
 public class CustomerListener implements ActionListener
 {
+	/**
+	 * The GUI of the Customer application.
+	 */
 	private CustomerGUI frame;
 	
+	/**
+	 * Constructs CustomerListener with a given CustomerGUI, f.
+	 * @param f of type CustomerGUI to be set to the frame variable.
+	 */
 	public CustomerListener(CustomerGUI f)
 	{
 		frame = f;
