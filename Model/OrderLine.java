@@ -69,7 +69,7 @@ public class OrderLine  implements Serializable
 	 * Generates the amount to be ordered (quantityRequired) by the current stock 
 	 * subtracted from 50.
 	 */
-	public void quantityOrder()
+	public synchronized void quantityOrder()
 	{
 		quantityRequired = 50 - item.getStock();
 	}

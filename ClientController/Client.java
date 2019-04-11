@@ -101,7 +101,7 @@ public class Client
 						case "2": // List tools
 							ArrayList<Item> recordTool = new ArrayList<Item>((ArrayList<Item>)objectIn.readObject());
 							app.getList().addElement("************************* TOOLS LIST *************************");
-							if(recordTool.isEmpty())
+							if(recordTool.isEmpty() || recordTool == null)
 							{
 								app.getList().addElement("No tools to print!");
 							}
@@ -159,7 +159,7 @@ public class Client
 								app.createMessageDialog(id6 + " could not be decreased.\n", "Decrease Quantity");
 								break;
 							}
-							app.createMessageDialog("Item "+ id6 + "'s stock has been reduced by " + reduced + " (" + mes + ").\n The new stock is " + recordItem6 +"!\n", "Decrease Quantity");
+							app.createMessageDialog("Item "+ id6 + "'s tried to be reduced by " + reduced + " (" + mes + ").\n The stock is " + recordItem6 +"!\n", "Decrease Quantity");
 							break;
 						case "7":
 							ArrayList<Order> recordOrd = (ArrayList<Order>)objectIn.readObject();
@@ -177,6 +177,9 @@ public class Client
 							}
 							app.getList().addElement("**************************************************************");
 							break;	
+						default:
+							System.out.println("Option doesn't exist for this client");
+							break;
 					}
 				}
 			}
@@ -199,7 +202,7 @@ public class Client
 	 * Sends string towards the server.
 	 * @param s String to be sent towards the server.
 	 */
-	public void sendString(String s) 
+	protected void sendString(String s) 
 	{
 		writeServer.println(s);
 		writeServer.flush();
@@ -279,7 +282,6 @@ public class Client
 	
 	public static void main(String[] args) 
 	{
-		//"10.13.170.15"
 		Client c = new Client("localhost", 8099);
 		c.app.buildAll(); // Builds GUI
 		c.communicate();

@@ -151,6 +151,11 @@ public class Item implements Serializable
 		return id + ";" + name  + ";" + stock + ";" + price + ";" +  supplierId;
 	}
 	
+	public String customerString()
+	{
+		return "TOOL: " + name + ", \tPRICE: " + price + ", \tSTOCK: " + stock;
+	}
+	
 	/**
 	 * Checks the stock of the item and returns a boolean value based on 
 	 * if the stock need to be replaced.
@@ -175,9 +180,8 @@ public class Item implements Serializable
 	{
 		stock = stock - sold;
 	}
-	public synchronized void setStock(int newQuantity) {
-		this.stock+=newQuantity;
+
+	public synchronized void setStock(int newQuantity){
+		this.stock += newQuantity;
 	}
-	
-	
 }

@@ -6,10 +6,10 @@ import java.util.ArrayList;
  * Has the main collection (inventory) of items, orders list, and
  * suppliers list.
  * 
- * @author Daryl, Ilyas, Will
+ * @author Daryl Dang
  * @since Feb 5, 2019
  */
-public class Shop 
+public class Shop
 {
 	/**
 	 * The orders that are currently active for the store.
@@ -25,15 +25,23 @@ public class Shop
 	 * The main suppliers list that provide items.
 	 */
 	private ArrayList<Supplier> suppliers;
+
+	/**
+	 *
+	 */
+	private Database database;
 	
 	/**
-	 * Constructs shop with null values for collection and suppliers, and default constructor. (DEFAULT CONSTRUCTOR) 
+	 * Constructs shop with null values for collection and suppliers, and reads information from text,
+	 * and default constructor. (DEFAULT CONSTRUCTOR) 
 	 */
 	public Shop()
 	{
-		orders = null; 
+		orders = new ArrayList<Order>(); 
 		collection = null;
 		suppliers = null;
+		database = new Database();
+		readText(this);
 	}
 	
 	/**
@@ -90,7 +98,6 @@ public class Shop
 	{
 		orders = o;
 	}
-	
 	/**
 	 * Adds o to the the list orders.
 	 * @param o of type Order to be added to the end of the list of orders.
@@ -99,5 +106,37 @@ public class Shop
 	{
 		orders.add(o);
 	}
+
+	public Database getDatabase(){
+		return database;
+	}
+	/**
+	 * Read all the information form text file
+	 * @param theShop the shop that will store the information
+	 */
+	public void readText(Shop theShop) {
+
+		try
+		{
+
+			ArrayList<Item> temp1 = database.getItemList();
+			theShop.setCollection(temp1);
+			System.out.println("items successfully loaded from database");
+			
+			ArrayList<Supplier> temp2 = database.getSupplierList();
+			theShop.setSuppliers(temp2);
+			System.out.println("suppliers successfully loaded from database");
+
+		}
+		catch(Exception e)
+		{
+			System.out.println("File not found");
+		}
+	}
+	
+
+	
+
+	
 	
 }
