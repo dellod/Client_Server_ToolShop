@@ -181,6 +181,10 @@ public class Item implements Serializable
 		stock = stock - sold;
 	}
 
+	/**
+	 * Sets the stock to the new value after the order is done
+	 * @param newQuantity the value to set the stock to
+	 */
 	public synchronized void setStock(int newQuantity){
 		this.stock += newQuantity;
 	}
